@@ -1,32 +1,39 @@
-import React from "react";
+import React, { useRef } from "react";
 import Navbar from "./Navbar";
 import "../../style.css";
 import Fooder from "./Fooder";
+import Data from "./Data";
+import { Link } from "react-router-dom";
 function Home() {
+  const Features = useRef();
+  const gotofecture = () => {
+    window.scrollTo({
+      top: Features.current.offsetTop,
+      behavior: "smooth",
+    });
+  };
   return (
     <div>
       {" "}
       <Navbar></Navbar>
+      {/* <Data></Data> */}
       <div className="wrapper my-24  w-full md:flex ">
         <div className="leftdiv">
           <h1 className="text-4xl font-bold hometitle">
             Free Bulk Email Service
           </h1>
           <p className="smalltext">
-            Free mass email service for up to 300 emails a day. Store unlimited
-            contacts.
+            Send unlimited emails to your subscribers for free. No credit card.
             <br />
-            <br />
-            No credit card. No commitment.
           </p>
-          <div className="container-button ">
+          <div className="container button ">
             {/* tewind css btn btn-primary  */}
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 text-center rounded  my-6 ml-12 px-3 ">
-              Get Started
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 text-center rounded  my-6 ml-12 md: ml-14 px-3 ">
+              <Link to="/login">Get Started</Link>
             </button>
           </div>
         </div>
-        <div className="container-video rightbox  mx-auto  justify-center">
+        <div className="container video rightbox  mx-auto  justify-center">
           <img
             alt=""
             // className="cover"
@@ -37,9 +44,9 @@ function Home() {
         </div>
       </div>
       <section className="section-2" style={{ marginTop: "-80px" }}>
-        <div className="container mx-auto">
+        <div className="md:container  mx-auto">
           <div className="flex flex-wrap">
-            <div className="w-full ">
+            <div className=" w-4/5 mx-auto">
               <div className="flex flex-col justify-center h-full infotext">
                 <h1 className="text-4xl text-center mb-4 font-bold">
                   Powerful & affordable mass emails
@@ -64,7 +71,7 @@ function Home() {
         </div>
         <div className="container mx-auto my-12">
           <div className="flex flex-wrap">
-            <div className="w-full ">
+            <div className="w-4/5 mx-auto">
               <div className="flex flex-col justify-center h-full infotext">
                 <h1 className="text-4xl text-center mb-3 font-bold">
                   Built for best email marketing results
@@ -86,14 +93,17 @@ function Home() {
       <section className="section-3">
         <div className="container mx-auto">
           <div className="flex flex-wrap">
-            <div className="w-full ">
+            <div className="w-4/5 mx-auto ">
               <div className="flex flex-col justify-center h-full">
-                <h1 className="text-4xl text-center mb-4 font-bold">
+                <h1
+                  onClick={gotofecture}
+                  className="text-4xl text-center mb-4 font-bold"
+                >
                   Features
                 </h1>
                 <div className="flex mx-auto w-full flex-wrap">
                   <div className="w-full md:w-1/2 lg:w-1/2 ">
-                    <div className="flex flex-col justify-center items-center mx-auto w-96 h-full">
+                    <div className="flex flex-col justify-center items-center mx-auto w-[80%] md:w-96 h-full">
                       <img src="https://www.sendinblue.com/wp-content/uploads/2020/05/junk_mail-min.png" />
                     </div>
                   </div>
@@ -131,7 +141,7 @@ function Home() {
 
         <div className="container mx-auto">
           <div className="flex flex-wrap">
-            <div className="w-full ">
+            <div className="w-4/5 mx-auto ">
               <div className="flex flex-col justify-center h-full">
                 <div className="flex mx-auto w-full flex-wrap">
                   <div className="w-full md:w-1/2 lg:w-1/2  ">
@@ -154,7 +164,7 @@ function Home() {
                     </div>
                   </div>
                   <div className="w-full md:w-1/2 lg:w-1/2 ">
-                    <div className="flex flex-col justify-center items-center mx-auto w-full h-full">
+                    <div className="flex flex-col justify-center items-center mx-auto w-[80%] md:w-96 h-full">
                       <img src="https://www.sendinblue.com/wp-content/uploads/2020/04/Illu-1@2x-1-2.png" />
                     </div>
                   </div>
@@ -165,11 +175,11 @@ function Home() {
         </div>
         <div className="container mx-auto">
           <div className="flex flex-wrap">
-            <div className="w-full ">
+            <div className="w-4/5 mx-auto ">
               <div className="flex flex-col justify-center h-full">
                 <div className="flex mx-auto w-full flex-wrap">
                   <div className="w-full md:w-1/2 lg:w-1/2 ">
-                    <div className="flex flex-col justify-center items-center mx-auto w-96 h-full">
+                    <div className="flex flex-col justify-center items-center mx-auto w-[80%] md:w-96 h-full">
                       <img src="https://www.sendinblue.com/wp-content/uploads/2021/02/real_time_statistics-min.png" />
                     </div>
                   </div>
@@ -180,26 +190,13 @@ function Home() {
                   >
                     <div className="flex flex-col justify-center h-full infotext ">
                       <h1 className="text-4xl text-center mb-3 font-bold">
-                        Detailed email reports and analytics in real-time
+                        Spam Mail detection
                       </h1>
                       <p className="text text-gray-600 ">
-                        Understand what works well for your audience and
-                        pinpoint areas of improvement thanks to advanced
-                        reporting features.Understand what works well for your
-                        audience and pinpoint areas of improvement thanks to
-                        advanced reporting features.
+                        By usgin our spam mail detection you can easily detect
+                        spam mails and cant send them to your customers and
+                        clients.
                       </p>
-                      <ul className="list-disc ml-3 text-gray-600 ">
-                        <li>
-                          Real-time delivery rates and performance metrics
-                          (deliverability rates, open rate, clicks, bounces)
-                        </li>
-                        <li>Clear, easy-to-digest data for rapid analysis</li>
-                        <li>
-                          Custom webhooks for real-time updates however you want
-                          to receive them
-                        </li>
-                      </ul>
                     </div>
                   </div>
                 </div>
@@ -211,7 +208,7 @@ function Home() {
       <section className="section-2 my-9">
         <div className="container mx-auto">
           <div className="flex flex-wrap">
-            <div className="w-full ">
+            <div className="w-4/5 mx-auto ">
               <div className="flex flex-col justify-center h-full infotext">
                 <h1 className="text-4xl text-center mb-4 font-bold">
                   A bulk email service to grow your email list
@@ -232,11 +229,11 @@ function Home() {
       <section className="section-3 my-10">
         <div className="container mx-auto">
           <div className="flex flex-wrap">
-            <div className="w-full ">
+            <div className="w-4/5 mx-auto ">
               <div className="flex flex-col justify-center h-full">
                 <div className="flex mx-auto w-full flex-wrap">
                   <div className="w-full md:w-1/2 lg:w-1/2 ">
-                    <div className="flex flex-col justify-center items-center mx-auto  w-96 h-full  ">
+                    <div className="flex flex-col justify-center items-center mx-auto  w-[80%] md:w-96 h-full  ">
                       <img src="https://www.sendinblue.com/wp-content/uploads/2020/03/Illu-2@2x-4.png" />
                     </div>
                   </div>
@@ -244,24 +241,13 @@ function Home() {
                   <div className="w-full md:w-1/2 lg:w-1/2  ">
                     <div className="flex flex-col justify-center h-full infotext ">
                       <h1 className="text-4xl text-center mb-3 font-bold">
-                        Customizable email subscription forms
+                        Auto send emails to new subscribers and customers
                       </h1>
                       <p className="text text-gray-600 ">
-                        Our email marketing solution lets you create sign-up
-                        forms to embed on your website and share on social
-                        media.
+                        Send automated emails to new subscribers and customers
+                        and if any festival or any event is going on then you
+                        can send them a mail to inform them about the event.
                       </p>
-                      <ul className="list-disc ml-3 text-gray-600 ">
-                        <li>Drag-and-drop builder for signup forms</li>
-                        <li>
-                          Multi-list subscription functionality sorts contacts
-                          into different lists
-                        </li>
-                        <li>
-                          Update Profile forms and unsubscribe pages to update
-                          emailing preferences
-                        </li>
-                      </ul>
                     </div>
                   </div>
                 </div>
@@ -272,37 +258,36 @@ function Home() {
 
         <div className="container mx-auto">
           <div className="flex flex-wrap">
-            <div className="w-full ">
+            <div className="w-4/5 mx-auto ">
               <div className="flex flex-col justify-center h-full">
                 <div className="flex mx-auto w-full flex-wrap">
                   <div className="w-full md:w-1/2 lg:w-1/2  ">
                     <div className="flex flex-col justify-center h-full infotext ">
                       <h1 className="text-4xl text-center mb-3 font-bold">
-                        Easy-to-implement double opt-in confirmation
+                        Import contacts quickly and easily
                       </h1>
                       <p className=" justify-center text-gray-600 ">
-                        Practice permission-based email marketing with a double
-                        opt-in confirmation email upon sign-up. Double opt-in
-                        acts as proof of consent.
+                        Already got a contact list or moving from another bulk
+                        email provider? We have several easy options for
+                        importing existing contacts into your Sendinblue
+                        account.
                       </p>
                       <ul className="list-disc ml-3 text-gray-600 ">
                         <li>
-                          Send custom confirmation emails and welcome messages
+                          Import excel, .csv or .txt files in a few simple
+                          clicks
                         </li>
+                        <li>Manually add new contacts</li>
                         <li>
-                          Proof of consent record for individual subscriber
-                          profiles
-                        </li>
-                        <li>
-                          Unsubscribe link in the footer of all emails &
-                          list-unsubscribe header
+                          Synchronize contacts from another email provider, CRM
+                          or CMS using our custom integrations
                         </li>
                       </ul>
                     </div>
                   </div>
                   <div className="w-full md:w-1/2 lg:w-1/2 ">
-                    <div className="flex flex-col justify-center items-center mx-auto w-96 h-full">
-                      <img src="https://www.sendinblue.com/wp-content/uploads/2020/03/illu-Communicate1.png" />
+                    <div className="flex flex-col justify-center items-center mx-auto w-[80%] md:w-96 h-full">
+                      <img src="https://www.sendinblue.com/wp-content/uploads/2020/03/Illu-2@2x-1-1.png" />
                     </div>
                   </div>
                 </div>
@@ -310,13 +295,13 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="container mx-auto">
+        {/* <div className="container mx-auto">
           <div className="flex flex-wrap">
-            <div className="w-full ">
+            <div className="w-4/5 mx-auto">
               <div className="flex flex-col justify-center h-full">
                 <div className="flex mx-auto w-full flex-wrap">
                   <div className="w-full md:w-1/2 lg:w-1/2 ">
-                    <div className="flex flex-col justify-center items-center mx-auto w-96 h-full">
+                    <div className="flex flex-col justify-center items-center mx-auto w-[80%] md:w-96 h-full">
                       <img src="https://www.sendinblue.com/wp-content/uploads/2020/03/Illu-2@2x-1-1.png" />
                     </div>
                   </div>
@@ -351,7 +336,7 @@ function Home() {
           </div>
           <div className="container mx-auto">
             <div className="flex flex-wrap">
-              <div className="w-full ">
+              <div className="w-4/5 mx-auto ">
                 <div className="flex flex-col justify-center h-full">
                   <div className="flex mx-auto w-full flex-wrap">
                     <div className="w-full md:w-1/2 lg:w-1/2  ">
@@ -381,7 +366,7 @@ function Home() {
                       </div>
                     </div>
                     <div className="w-full md:w-1/2 lg:w-1/2 ">
-                      <div className="flex flex-col justify-center items-center mx-auto w-96 h-full ">
+                      <div className="flex flex-col justify-center items-center mx-auto w-[80%] md:w-96 h-full ">
                         <img src="https://www.sendinblue.com/wp-content/uploads/2020/03/Illu-2@2x-3.png" />
                       </div>
                     </div>
@@ -390,12 +375,12 @@ function Home() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
       <section className="section-2 my-9">
         <div className="container mx-auto">
           <div className="flex flex-wrap">
-            <div className="w-full ">
+            <div className="w-4/5 mx-auto ">
               <div className="flex flex-col justify-center h-full infotext">
                 <h1 className="text-4xl text-center  font-bold">
                   Bulk email marketing service with multi-
@@ -414,7 +399,7 @@ function Home() {
       </section>
       <section>
         <div className=" container mx-auto w-full grid lg:grid-cols-3 md:grid-cols-1 md:p-3 gap-4">
-          <div className="">
+          <div className="w-4/5 mx-auto">
             <div className="flex flex-col justify-center h-full ">
               <h3 className="text-2xl  ml-20 font-bold relative">
                 {" "}

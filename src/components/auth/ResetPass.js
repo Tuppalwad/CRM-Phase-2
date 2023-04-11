@@ -3,20 +3,21 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
+// import Link from '@mui/material/Link';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-
+// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { NavLink } from "react-router-dom";
+
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import swal from "sweetalert";
-import SocialLogin from "./SocialLogin";
 import account from "../Appwrite/appwriteConfig";
 import Navbar from "../Homepages/Navbar";
 
@@ -40,29 +41,52 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function ResetPass() {
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setConfPassword] = useState("");
   const navigate = useNavigate();
 
-  const loginUser = async (e) => {
-    e.preventDefault();
+  const handleSubmit1 = (event) => {
+    event.preventDefault();
+    const pass = password;
+    if (pass !== passwordConfirm) {
+      swal("Error", "Passwords do not match", "error");
+      return;
+    } else {
+      handleSubmit2(event, pass);
+    }
+  };
 
-    const data = new FormData(e.currentTarget);
-
-    const promise = account.createEmailSession(
-      data.get("email"),
-      data.get("password")
-    );
-
-    promise.then(
-      function (response) {
-        console.log(response); // Success
-        navigate("/profile");
-      },
-      function (error) {
-        console.log(error); // Failure
-        swal("Oops!", "Something went wrong!", "error");
-      }
-    );
+  const handleSubmit2 = (event, password) => {
+    event.preventDefault();
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const userId = urlParams.get("userId");
+      const secret = urlParams.get("secret");
+      const newPass = password;
+      const promise = account.updateRecovery(userId, secret, newPass, newPass);
+      promise.then(
+        function (response) {
+          console.log(response);
+          swal("Success", "Password reset successful", "success").then(() => {
+            navigate("/login");
+          });
+        },
+        function (error) {
+          console.log(error);
+          swal("Error", "Password reset failed", "error").then(() => {
+            navigate("/login");
+          });
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      swal(
+        "Error",
+        "Password reset failed please use link sent to mail",
+        "error"
+      );
+    }
   };
 
   return (
@@ -79,30 +103,20 @@ export default function SignIn() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 3, bgcolor: "secondary.main", fontSize: 30 }}>
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main", fontSize: 30 }}>
               <span role="img" aria-label="logo" aria-labelledby="logo">
                 👀
               </span>
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Reset you password
             </Typography>
             <Box
               component="form"
-              onSubmit={loginUser}
+              onSubmit={handleSubmit1}
               noValidate
               sx={{ mt: 1 }}
             >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
               <TextField
                 margin="normal"
                 required
@@ -112,33 +126,38 @@ export default function SignIn() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="passwordConfirm"
+                label="Confirm Password"
+                type="password"
+                id="passwordConfirm"
+                autoComplete="current-password"
+                onChange={(e) => {
+                  setConfPassword(e.target.value);
+                }}
               />
+
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Reset Password
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <NavLink to="/forgot" variant="body2">
-                    Forgot password?
-                  </NavLink>
-                </Grid>
                 <Grid item>
-                  <NavLink to="/register" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <NavLink to="/login" variant="body2">
+                    {"Login into your account"}
                   </NavLink>
                 </Grid>
-              </Grid>
-              <Grid container className="d-flex justify-content-center ">
-                <SocialLogin />
               </Grid>
             </Box>
           </Box>

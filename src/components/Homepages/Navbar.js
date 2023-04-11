@@ -2,15 +2,16 @@ import { style } from "@mui/system";
 import React, { useState } from "react";
 import "../../style.css";
 import Button from "./Button";
+import { Link } from "react-router-dom";
 // import AiOutlineMenuUnfold from "react-icons/ai";
 // import AiOutlineMenuFold from "react-icons/ai";
 function Navbar() {
   let Links = [
     { name: "Solutions", link: "/" },
-    { name: "Pricing", link: "/" },
+
     { name: "Features", link: "/" },
-    { name: "About", link: "/" },
-    { name: "Contact", link: "/" },
+
+    { name: "Contact", link: "/contact" },
   ];
   let [open, setOpen] = useState(false);
 
@@ -21,11 +22,13 @@ function Navbar() {
           className=" font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-800 "
         >
-          <span className="text-3xl text-indigo-600 mr-1 pt-2">
-            <ion-icon name="logo-ionic"></ion-icon>
-          </span>
-          <span className="text-2xl text-indigo-600">CRM</span>
-          <span className="text-2xl text-gray-800">Tool</span>
+          <Link to="/">
+            <span className="text-3xl text-indigo-600 mr-1 -mb-3">
+              <ion-icon name="logo-ionic"></ion-icon>
+            </span>
+            <span className="text-2xl text-indigo-600">CRM</span>
+            <span className="text-2xl text-gray-800">Tool</span>
+          </Link>
         </div>
 
         <div
@@ -36,10 +39,12 @@ function Navbar() {
         </div>
         <div className="md:hidden w-12 h-10 absolute right-12 top-7 cursor-pointer">
           {/* user icon here */}
-          <ion-icon
-            name="person-circle-outline"
-            style={{ width: "30px", height: "20px" }}
-          ></ion-icon>
+          <Link to="/login" className="text-gray-800  duration-300">
+            <ion-icon
+              style={{ width: "25px", height: "25px" }}
+              name="person-circle-outline"
+            ></ion-icon>
+          </Link>
         </div>
 
         <ul
@@ -49,12 +54,12 @@ function Navbar() {
         >
           {Links.map((link) => (
             <li key={link.name} className="  md:ml-8 text-md md:my-0 my-6">
-              <a
-                href={link.link}
+              <Link
+                to={link.link}
                 className="text-gray-800 hover:text-gray-400 duration-300"
               >
                 {link.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -62,17 +67,22 @@ function Navbar() {
         {/* how to do phone mode dislply none and desktop mode display block in tailwind css for login and signup button */}
 
         <div className="flex  md:ml-auto md:mr-0 mr-auto md:mt-0 mt-8  ">
-          <button className=" mr-6 py-1 lg:flex inPhonemode " name="Login">
+          <button className=" mr-6  py-1 lg:flex inPhonemode " name="Login">
             {" "}
-            Log In
+            <Link to="/login" className="text-gray-800  duration-300">
+              Sign in
+            </Link>
           </button>
-          <button
-            className=" bg-bluebg-blue-500 bg-blue-700 text-white py-2  font-bold  px-4 rounded-full  md:flex inPhonemode "
+          <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded">
+            <Link to="/register">Sign Up</Link>
+          </button>
+          {/* <button
+            className="bg-transparent hover:bg-blue-500 text-black font-semibold hover:text-black py-2 px-4 border border-blue-500 hover:border-transparent rounded"
             style={{ marginTop: "-5px" }}
           >
             {" "}
-            Sign Up
-          </button>
+           
+          </button> */}
         </div>
       </div>
     </div>

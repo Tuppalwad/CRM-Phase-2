@@ -1,7 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "tailwindcss/base";
 
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
 body {
   font-family: "League Spartan";
 }
@@ -45,9 +49,7 @@ body {
 }
 
 .imgright {
-  /* width: 50%; */
   margin-left: -50px;
-  /* margin-top: 50px; */
 }
 .rightbox {
   width: 50%;
@@ -99,3 +101,5 @@ body {
     padding: 17px;
   }
 }
+
+/* #Dnavabar logout btn  */

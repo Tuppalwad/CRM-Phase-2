@@ -3,16 +3,19 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
+// import Link from '@mui/material/Link';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { NavLink } from "react-router-dom";
+import account from "../Appwrite/appwriteConfig";
+
+import swal from "sweetalert";
 
 function Copyright(props) {
   return (
@@ -34,14 +37,31 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function Forgot() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const email = data.get("email");
+
+    const promise = account.createRecovery(
+      email,
+      "http://localhost:3000/reset-password"
+    );
+
+    promise.then(
+      function (response) {
+        console.log(response); // Success
+        swal(
+          "Success",
+          "Check your email for a password reset link",
+          "success"
+        );
+      },
+      function (error) {
+        console.log(error); // Failure
+        swal("Error", "Email is not registered on website", "error");
+      }
+    );
   };
 
   return (
@@ -57,7 +77,9 @@ export default function SignIn() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main", fontSize: 30 }}>
-            👀
+            <span role="img" aria-label="logo" aria-labelledby="logo">
+              👀
+            </span>
           </Avatar>
           <Typography component="h1" variant="h5">
             Reset you password
@@ -89,7 +111,7 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item>
-                <NavLink to="/" variant="body2">
+                <NavLink to="/login" variant="body2">
                   {"Login into your account"}
                 </NavLink>
               </Grid>
